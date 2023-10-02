@@ -54,7 +54,7 @@ SELECT * FROM offices;
 SELECT * FROM employees WHERE lastname = 'kato'
 
 
-ALTER TABLE employees DROP FOREIGN KEY employees_ibfk_2;     
+ALTER TABLE employees DROP FOREIGN KEY employees_ibfk_1;     
 ALTER TABLE employees ADD FOREIGN KEY (officeCode) REFERENCES offices (officeCode) ON UPDATE CASCADE;
 
 
