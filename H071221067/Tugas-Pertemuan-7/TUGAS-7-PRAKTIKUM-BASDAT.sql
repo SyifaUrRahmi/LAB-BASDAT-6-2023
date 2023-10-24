@@ -49,10 +49,12 @@ OR SUM(p.amount) =
 
 # No 3
 USE  world;
+SELECT * FROM countrylanguage;
+SELECT * FROM country;
 
 SELECT
     c.`Name` 'Negara',
-    (c.Population * cl.Percentage) 'Pengguna Bahasa'
+    (c.Population * (cl.Percentage*100)) 'Pengguna Bahasa'
 FROM country c
 JOIN countrylanguage cl
 ON c.`Code` = cl.CountryCode
@@ -65,7 +67,7 @@ WHERE cl.`language` =
 		GROUP BY countrylanguage.`language`
 		ORDER BY COUNT(countrylanguage.`language`) DESC
 		LIMIT 1)
-ORDER BY (c.Population * cl.Percentage);
+ORDER BY (c.Population * (cl.Percentage/100));
 # No 4
 USE classicmodels;
 
