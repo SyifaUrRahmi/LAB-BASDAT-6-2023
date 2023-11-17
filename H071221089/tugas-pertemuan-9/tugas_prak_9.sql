@@ -80,3 +80,20 @@ GROUP BY customerName
 HAVING `keterangan` IS NOT NULL
 ORDER BY `keterangan`
 
+
+## Nomor 5
+BEGIN;
+SET autocommit = 0;
+DELETE FROM employees
+WHERE jobTitle = 'Sales Rep'
+AND employeeNumber not IN ( SELECT e.employeeNumber
+                        FROM customers c
+                        JOIN payments p
+                        USING (customerNumber)
+                        JOIN employees e ON c.salesRepEmployeeNumber = e.employeeNumber
+                        WHERE e.jobTitle = 'Sales Rep'
+                        GROUP BY e.employeeNumber
+								);
+SELECT * FROM employees;
+ROLLBACK;
+SELECT * FROM employees;
